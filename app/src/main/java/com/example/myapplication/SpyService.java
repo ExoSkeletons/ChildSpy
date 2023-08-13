@@ -10,7 +10,7 @@ public final class SpyService extends ForegroundService {
 	public static void startService(Context context) {
 		stopService(context);
 
-		Log.d("Spy","starting service...");
+		Log.d("Spy", "starting service...");
 
 		Intent serviceIntent = new Intent(context, SpyService.class);
 		serviceIntent.putExtra(context.getString(R.string.extra_foreground_service_desc), context.getString(R.string.foreground_service_desc));
@@ -18,7 +18,7 @@ public final class SpyService extends ForegroundService {
 	}
 
 	public static void stopService(Context context) {
-		Log.d("Spy","stopping service...");
+		Log.d("Spy", "stopping service...");
 
 		Intent serviceIntent = new Intent(context, SpyService.class);
 		context.stopService(serviceIntent);
@@ -26,14 +26,35 @@ public final class SpyService extends ForegroundService {
 
 	@Override
 	protected void doInBackground() {
+		long spySleepTime = 1000;
 		Log.d("Spy", "hee hee");
 		try {
-			long spySleepTime = 1000;
+			doSpy();
 			Thread.sleep(spySleepTime);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
+	private void doSpy() {
+		gatherData();
+		saveData();
+		uploadData();
+	}
 
+	private void gatherData() {
+		takeScreenshot();
+	}
+
+	private boolean takeScreenshot() {
+		return false;
+	}
+
+	private boolean saveData() {
+		// TODO: save or discard if dupe
+		return false;
+	}
+
+	private void uploadData() {
+	}
 }
